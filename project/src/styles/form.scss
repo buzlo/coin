@@ -1,0 +1,54 @@
+@import 'variables';
+
+.form {
+  &__input {
+    border: 1px solid $border-color;
+    padding: 10px 16px;
+
+    font-size: 16px;
+    line-height: 24px;
+
+    border-radius: 7px;
+    background-color: $white;
+
+    transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+
+    &:focus {
+      border-color: $primary;
+      background-color: $primary-translucent;
+
+      &::placeholder {
+        color: transparent;
+      }
+    }
+
+    &:hover {
+      border-color: $primary;
+      background-color: $primary-translucent-more;
+    }
+
+    &::placeholder {
+      color: $gray-4;
+      transition: color 0.3s ease-in-out;
+    }
+
+    &_error {
+      background-color: $white;
+      border-color: $error;
+    }
+  }
+
+  &__label {
+    font-size: 16px;
+    font-weight: 500;
+    color: $secondary-1;
+  }
+
+  &__error-label {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: $error;
+    background-image: url('../assets/images/svg/warning.svg');
+  }
+}

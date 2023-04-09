@@ -1,0 +1,17 @@
+@use 'sass:color';
+
+@function translucify($color, $amount) {
+  @return color.adjust($color, $alpha: -$amount);
+}
+
+@function lighten($color, $percentage) {
+  @return color.adjust($color, $lightness: $percentage);
+}
+
+@function whiten($color, $percentage) {
+  @return color.adjust($color, $whiteness: $percentage);
+}
+
+@function blacken($color, $percentage) {
+  @return color.adjust($color, $blackness: $percentage);
+}

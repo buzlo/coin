@@ -1,0 +1,30 @@
+@import 'variables';
+
+.btn {
+  border: 2px solid transparent;
+  padding: calc(1em - 4px) calc(1.5em - 4px);
+  background-color: var(--btn-background-color);
+  transition: background-color .3s ease-in-out, border-color 0.3s ease-in-out;
+
+  &_primary {
+    --btn-background-color: #{$primary};
+    color: $white;
+
+    border-radius: 7px;
+    border-color: $primary;
+
+    &:hover {
+      background-color: $primary-light;
+      border-color: $primary-light;
+    }
+
+    &:focus {
+      border-color: $primary-dark;
+    }
+
+    &:active {
+      background-color: $primary-dark;
+      border-color: $primary-dark;
+    }
+  }
+}

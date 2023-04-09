@@ -1,0 +1,49 @@
+@import 'variables';
+
+.sign-in-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-width: 500px;
+  padding: 50px 40px;
+  display: grid;
+  row-gap: 25px;
+  column-gap: 18px;
+  grid-template-columns: 60px 300px 60px;
+
+  transform: translate(-50%, -50%);
+  background-color: $gray-7;
+  border-radius: 50px;
+
+  .form__title {
+    grid-column: 2;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 40px;
+  }
+
+  .form__label {
+    grid-column: 1 / span 3;
+    align-self: center;
+
+    display: grid;
+    grid-template-columns: inherit;
+    column-gap: inherit;
+    align-items: center;
+  }
+
+  .form__btn {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .form__error-label:last-child {
+    grid-column: 2;
+  }
+
+  &_validated {
+    grid-template-columns: 60px 300px 200px;
+  }
+}

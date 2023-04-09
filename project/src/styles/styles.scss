@@ -1,0 +1,93 @@
+@import 'variables';
+
+@import 'btn';
+@import 'form';
+
+@font-face {
+  font-family: Ubuntu;
+  src: url(../assets/fonts/Ubuntu-Bold.woff);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url(../assets/fonts/Ubuntu-Medium.woff);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url(../assets/fonts/Ubuntu-Regular.woff);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Ubuntu;
+  src: url(../assets/fonts/Ubuntu-Light.woff);
+  font-weight: 300;
+}
+
+body {
+  font-family: Ubuntu;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+button, input {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+}
+
+img {
+  max-width: 100%;
+  user-select: none;
+}
+
+p {
+  margin-top: 0;
+}
+
+picture img {
+  width: 100%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+svg {
+  overflow: visible;
+  user-select: none;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
