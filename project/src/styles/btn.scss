@@ -1,30 +1,56 @@
 @import 'variables';
 
 .btn {
+  display: inline-block;
   border: 2px solid transparent;
   padding: calc(1em - 4px) calc(1.5em - 4px);
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  border-radius: 7px;
   background-color: var(--btn-background-color);
-  transition: background-color .3s ease-in-out, border-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
 
   &_primary {
     --btn-background-color: #{$primary};
     color: $white;
 
-    border-radius: 7px;
     border-color: $primary;
+
+    &:focus {
+      border-color: $primary-dark;
+    }
 
     &:hover {
       background-color: $primary-light;
       border-color: $primary-light;
     }
 
-    &:focus {
-      border-color: $primary-dark;
-    }
-
     &:active {
       background-color: $primary-dark;
       border-color: $primary-dark;
+    }
+  }
+
+  &_outline {
+    --btn-background-color: #{$white};
+    color: $primary;
+    border-color: $primary;
+
+    &:focus {
+      background-color: $primary-lightest;
+    }
+
+    &:hover {
+      border-color: $primary;
+      background-color: $primary-lightest;
+    }
+
+    &_pressed {
+      border-color: $primary-light;
+      background-color: $primary-lighter;
     }
   }
 }

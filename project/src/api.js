@@ -1,5 +1,5 @@
 export async function fetchToken(login, password) {
-  return fetch('http://localhost:3000/login', {
+  const res = await fetch('http://localhost:3000/login', {
     method: 'POST',
     body: JSON.stringify({
       login,
@@ -8,16 +8,16 @@ export async function fetchToken(login, password) {
     headers: {
       'Content-Type': 'application/json',
     },
-  })
-    .then((res) => res.json())
-    .then((parsedRes) => {
-      if (parsedRes.error) throw Error(parsedRes.error);
-      return parsedRes.payload.token;
-    })
-    .then((token) => {
-      window.localStorage.setItem('coin-token', token);
-      return token;
-    });
+  });
+
+  const parsedRes = await res.json();
+  if (parsedRes.error) throw Error(parsedRes.error);
+
+  const token = parsedRes.payload.token;
+
+  window.localStorage.setItem('coin-token', token);
+
+  return token;
 }
 
 export function getToken(login = null, password = null) {
@@ -35,4 +35,15 @@ export function getAccounts(token) {
   })
     .then((res) => res.json())
     .then((parsedRes) => parsedRes.payload);
+}
+
+export async function createAccount(token) {
+  const res = await fetch('http://localhost:3000/create-account', {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${token}`,
+    },
+  });
+  const parsedRes = await res.json();
+  return parsedRes.payload;
 }

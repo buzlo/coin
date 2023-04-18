@@ -4,6 +4,8 @@ $primary: #116acc;
 $primary-translucent: translucify(lighten($primary, 35%), 0.9);
 $primary-translucent-more: translucify(lighten($primary, 35%), 0.95);
 $primary-light: whiten($primary, 30%);
+$primary-lighter: whiten($primary, 60%);
+$primary-lightest: whiten($primary, 80%);
 $primary-dark: blacken($primary, 30%);
 $secondary-1: #182233;
 $secondary-2: #b3cee2;
@@ -21,8 +23,8 @@ $gray-7: #f3f4f6;
 $white: #fff;
 
 $info: #2f80ed;
-$success: #27ae60;
+$success: #76CA66;
 $warning: #e2b93b;
-$error: #eb5757;
+$error: #ba0000;
 
 $border-color: $gray-5;

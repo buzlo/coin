@@ -39,8 +39,10 @@
     justify-self: start;
   }
 
-  .form__error-label:last-child {
-    grid-column: 2;
+  .form__status-label {
+    &_common {
+      grid-column: 2;
+    }
   }
 
   &_validated {

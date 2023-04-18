@@ -1,0 +1,55 @@
+@import 'variables';
+
+.account-card {
+  max-width: 400px;
+  min-height: 156px;
+  padding: 22px;
+
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  background: #ffffff;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+
+  &__number {
+    width: 100%;
+
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: $secondary-1;
+  }
+
+  &__balance {
+    width: 100%;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    color: $secondary-1;
+  }
+
+  &__last-transaction-wrapper {
+    align-self: flex-end;
+
+    font-size: 13px;
+    line-height: 15px;
+
+    color: $black;
+  }
+
+  &__last-transaction-title {
+    margin-bottom: 0;
+    font-weight: 700;
+  }
+
+  &__last-transaction-date {
+    margin-bottom: 0;
+    font-weight: 400;
+  }
+}

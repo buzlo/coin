@@ -1,7 +1,6 @@
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = (env) => ({
@@ -14,7 +13,6 @@ module.exports = (env) => ({
     new HtmlWebpackPlugin({
       title: 'Coin',
     }),
-    new SpriteLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: 'main.[contenthash].css',
     }),
@@ -41,7 +39,12 @@ module.exports = (env) => ({
           // Creates `style` nodes from JS strings
           env.prod ? MiniCssExtractPlugin.loader : 'style-loader',
           // Translates CSS into CommonJS
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
           {
             // Loader for webpack to process CSS with PostCSS
             loader: 'postcss-loader',
@@ -50,10 +53,6 @@ module.exports = (env) => ({
                 plugins: () => [autoprefixer],
               },
             },
-          },
-          {
-            loader: 'resolve-url-loader',
-            options: {},
           },
           // Compiles Sass to CSS
           {
@@ -65,20 +64,12 @@ module.exports = (env) => ({
         ],
       },
       {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'svg-sprite-loader',
-            options: {
-              extract: true,
-              esModule: false,
-              spriteFilename: 'sprite.svg',
-            },
-          },
-        ],
+        resourceQuery: /source/,
+        type: 'asset/source',
       },
       {
-        test: /\.(png|jpg|jpeg|gif|woff)$/i,
+        test: /\.(png|jpg|jpeg|gif|gif|svg|woff)$/i,
+        resourceQuery: { not: [/source/] },
         type: 'asset/resource',
       },
     ],

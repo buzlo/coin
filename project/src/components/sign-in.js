@@ -30,7 +30,10 @@ export default function (onSubmit) {
 
   const validation = new JustValidate($form, {
     validateBeforeSubmitting: true,
-    errorLabelCssClass: ['form__error-label'],
+    errorLabelCssClass: ['form__status-label', 'form__status-label_error'],
+    successLabelCssClass: ['form__status-label', 'form__status-label_success'],
+    successLabelStyle: {},
+    errorLabelStyle: {},
   });
 
   validation.onValidate(() => {
@@ -38,28 +41,35 @@ export default function (onSubmit) {
   });
 
   for (const $input of [$loginInput, $passwordInput]) {
-    validation.addField($input, [
-      {
-        rule: 'required',
-        errorMessage: 'Обязательное поле',
-      },
-      {
-        rule: 'minLength',
-        value: 6,
-        errorMessage: 'Не менее 6 символов',
-      },
-      {
-        validator: (value) => !value.includes(' '),
-        errorMessage: 'Пробелы не допускаются',
-      },
-    ]);
+    validation.addField(
+      $input,
+      [
+        {
+          rule: 'required',
+          errorMessage: 'Обязательное поле',
+        },
+        {
+          rule: 'minLength',
+          value: 6,
+          errorMessage: 'Не менее 6 символов',
+        },
+        {
+          validator: (value) => !value.includes(' '),
+          errorMessage: 'Пробелы не допускаются',
+        },
+      ],
+      { successMessage: 'Формат корректен' }
+    );
   }
 
   const $btn = el('button.form__btn.btn.btn_primary', 'Войти', {
     type: 'submit',
   });
 
-  const $authErrorMessage = el('p.form__error-label', 'Ошибка авторизации');
+  const $authErrorMessage = el(
+    'p.form__status-label.form__status-label_common.form__status-label_error',
+    'Ошибка авторизации'
+  );
 
   setChildren($form, [
     el('h2.form__title', 'Вход в аккаунт'),

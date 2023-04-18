@@ -44,11 +44,22 @@
     color: $secondary-1;
   }
 
-  &__error-label {
+  &__status-label {
+    padding-left: 30px;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-    color: $error;
-    background-image: url('../assets/images/svg/warning.svg');
+    background-repeat: no-repeat;
+    background-position: left center;
+
+    &_error {
+      color: $error;
+      background-image: url('../assets/images/svg/warning.svg');
+    }
+
+    &_success {
+      color: $success;
+      background-image: url('../assets/images/svg/circle-check.svg');
+    }
   }
 }

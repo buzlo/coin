@@ -8,10 +8,10 @@
   @return color.adjust($color, $lightness: $percentage);
 }
 
-@function whiten($color, $percentage) {
-  @return color.adjust($color, $whiteness: $percentage);
+@function whiten($color, $weight) {
+  @return color.mix(white, $color, $weight);
 }
 
-@function blacken($color, $percentage) {
-  @return color.adjust($color, $blackness: $percentage);
+@function blacken($color, $weight) {
+  @return color.mix(black, $color, $weight);
 }
