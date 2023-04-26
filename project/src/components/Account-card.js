@@ -40,7 +40,7 @@ export default class {
   update(accountData) {
     Object.assign(this, accountData);
     this.$account.textContent = this.account;
-    this.$balance.textContent = numberFormat(this.balance) + ' ₽';
+    this.$balance.textContent = numberFormat(this.balance) + '\u00A0₽';
     this.lastTransactionDate =
       this.transactions.length !== 0 ? this.transactions[0].date : null;
     this.$lastTransactionDate.textContent = this.lastTransactionDate

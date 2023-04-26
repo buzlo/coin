@@ -1,4 +1,4 @@
-export default function (string, short) {
+export default function (string, short = false) {
   const date = new Date(string),
     day = ('0' + date.getDate()).slice(-2),
     month = ('0' + (Number(date.getMonth()) + 1)).slice(-2),

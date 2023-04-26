@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "chart.js": "^4.2.1",
     "choices.js": "^10.2.0",
     "imask": "^6.5.0-alpha.0",
     "just-validate": "^4.2.0",

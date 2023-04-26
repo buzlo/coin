@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { el, list, setChildren } from 'redom';
 import Select from './Select';
 import '../styles/accounts.scss';
@@ -12,7 +11,7 @@ class AccountsPage {
   }
 
   createAccountsPage(onCreateClick) {
-    this.$container = el('.accounts__container.container');
+    this.$container = el('.accounts.container.main-container');
 
     const $accountsTitle = el('h2.accounts__title.window-title', 'Ваши счета');
 
@@ -23,10 +22,8 @@ class AccountsPage {
       { text: 'По последней транзакции', value: 'transactions' },
     ];
 
-    const $accountsSelect = new Select(
-      'accounts',
-      selectOptions,
-      (value) => this.selectHandler(value)
+    const $accountsSelect = new Select('accounts', selectOptions, (value) =>
+      this.selectHandler(value)
     ).$el;
 
     const $accountsCreateBtn = el(

@@ -67,7 +67,7 @@ export default function (onSubmit) {
   });
 
   const $authErrorMessage = el(
-    'p.form__status-label.form__status-label_common.form__status-label_error',
+    'p.form__status-label.form__status-label_error',
     'Ошибка авторизации'
   );
 
@@ -78,15 +78,14 @@ export default function (onSubmit) {
     $btn,
   ]);
 
-  $form.addEventListener('submit', async (event) => {
+  validation.onSuccess(async (event) => {
     event.preventDefault();
-    if (validation.isValid)
-      try {
-        await onSubmit($loginInput.value, $passwordInput.value);
-      } catch (error) {
-        if (error.name !== 'Error') throw error;
-        mount($form, $authErrorMessage);
-      }
+    try {
+      await onSubmit($loginInput.value, $passwordInput.value);
+    } catch (error) {
+      if (error.name !== 'Error') throw error;
+      mount($form, $authErrorMessage);
+    }
   });
 
   return $form;

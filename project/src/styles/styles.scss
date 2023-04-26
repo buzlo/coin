@@ -96,9 +96,26 @@ svg {
   padding: 0 50px;
 }
 
+.main-container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
 .window-title {
   font-weight: 700;
   font-size: 34px;
   line-height: 40px;
   color: $black;
+}
+
+.form-label {
+  height: fit-content;
+}
+
+.text-success {
+  color: $success!important;
+}
+
+.text-error {
+  color: $error!important;
 }

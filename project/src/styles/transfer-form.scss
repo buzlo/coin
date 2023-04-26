@@ -1,0 +1,41 @@
+@import 'variables';
+
+.transfer-form {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-gap: 25px 18px;
+
+  flex-basis: 600px;
+  padding: 25px 50px;
+
+  border-radius: 50px;
+  background-color: $gray-7;
+
+  &__title {
+    grid-column: span 2;
+    margin-bottom: 0;
+  }
+
+  &__label {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: inherit;
+    grid-gap: inherit;
+    justify-items: end;
+    align-items: center;
+  }
+
+  &__input {
+    justify-self: stretch;
+  }
+
+  &__btn {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .form__status-label {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

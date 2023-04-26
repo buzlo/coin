@@ -1,7 +1,9 @@
 @import 'variables';
 
 .btn {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   border: 2px solid transparent;
   padding: calc(1em - 4px) calc(1.5em - 4px);
 

@@ -37,6 +37,16 @@ export function getAccounts(token) {
     .then((parsedRes) => parsedRes.payload);
 }
 
+export function getDetails(accountNumber, token) {
+  return fetch(`http://localhost:3000/account/${accountNumber}`, {
+    headers: {
+      Authorization: `Basic ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((parsedRes) => parsedRes.payload);
+}
+
 export async function createAccount(token) {
   const res = await fetch('http://localhost:3000/create-account', {
     method: 'POST',
@@ -45,5 +55,23 @@ export async function createAccount(token) {
     },
   });
   const parsedRes = await res.json();
+  return parsedRes.payload;
+}
+
+export async function transferFunds({ from, to, amount }, token) {
+  const res = await fetch('http://localhost:3000/transfer-funds', {
+    method: 'POST',
+    body: JSON.stringify({
+      from,
+      to,
+      amount,
+    }),
+    headers: {
+      Authorization: `Basic ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  const parsedRes = await res.json();
+  if (parsedRes.error) throw new Error(parsedRes.error);
   return parsedRes.payload;
 }
