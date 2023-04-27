@@ -4,12 +4,13 @@ import numberFormat from '../helpers/number-format';
 import '../styles/transactions.scss';
 
 export default class {
-  constructor(parentCssClass, accountData) {
+  constructor({ parentCssClass, accountData, maxQty = 10, href }) {
     this.account = accountData.account;
+    this.maxQty = maxQty;
 
-    this.$el = el(`a.${parentCssClass}__transactions.transactions`, {
-      href: `/transactions/${this.account}`,
-    });
+    this.$el = el(`a.${parentCssClass}__transactions.transactions`);
+    if (href) this.$el.setAttribute('href', href);
+
     this.$table = el('table.transactions__table');
     const $caption = el('caption.transactions__caption', 'История переводов');
     const $theadTR = el('tr.transactions__thead-row');
@@ -34,7 +35,7 @@ export default class {
   set transactions(transactionsArr) {
     this.transactionRows = [];
     for (const transaction of transactionsArr.toReversed()) {
-      if (this.transactionRows.length >= 10) break;
+      if (this.transactionRows.length >= this.maxQty) break;
 
       const isInbound = transaction.to === this.account;
 

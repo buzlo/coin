@@ -1,7 +1,6 @@
 @import 'variables';
 
-.balance-chart {
-  flex-basis: 600px;
+.chart {
   padding: 25px 50px;
   transition: box-shadow .3s ease-in-out, border-color .3s ease-in-out;
 
@@ -22,5 +21,9 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
+  }
+
+  &__canvas-wrapper {
+    height: 238px;
   }
 }

@@ -1,42 +1,20 @@
-import { el, list, setChildren } from 'redom';
+import { el, setChildren } from 'redom';
 import '../styles/details.scss';
 import TransferForm from './Transfer-form';
 import numberFormat from '../helpers/number-format';
-import GoBackBtn from './Go-back-btn';
 import BalanceChart from './Balance-chart';
 import TransactionsTable from './Transactions';
+import Subheader from './Subheader';
 
 export default class {
   constructor(accountData, onTransferSubmit) {
     this.$container = el('.details.container.main-container');
 
-    this.$detailsTitle = el('h2.details__title.window-title', 'Просмотр счёта');
-
-    this.$detailsAccountNumber = el(
-      'p.details__account-number',
-      `№ ${accountData.account}`
-    );
-
-    this.$detailsBalanceTitle = el('h3.details__balance-title', 'Баланс:');
-
-    this.$detailsBalanceValue = el(
-      'p.details__balance-value',
-      numberFormat(accountData.balance.toFixed(2)) + '\u00A0₽'
-    );
-
-    this.$detailsBalanceWrapper = el('.details__balance-wrapper', [
-      this.$detailsBalanceTitle,
-      this.$detailsBalanceValue,
-    ]);
-
-    this.$goBackBtn = new GoBackBtn().$el;
-
-    this.$subheader = el('.details__subheader', [
-      this.$detailsTitle,
-      this.$goBackBtn,
-      this.$detailsAccountNumber,
-      this.$detailsBalanceWrapper,
-    ]);
+    this.$subheader = new Subheader(
+      accountData,
+      'Просмотр счёта',
+      'details'
+    ).$el;
 
     this.$transferForm = new TransferForm(
       'details',
@@ -48,9 +26,18 @@ export default class {
       }
     ).$el;
 
-    this.$balanceChart = new BalanceChart('details', accountData).$el;
+    this.$balanceChart = new BalanceChart({
+      parentCssClass: 'details',
+      accountData,
+      monthsQty: 6,
+      href: `/transactions/${accountData.account}`,
+    }).$el;
 
-    this.transactionsTable = new TransactionsTable('details', accountData);
+    this.transactionsTable = new TransactionsTable({
+      parentCssClass: 'details',
+      accountData,
+      href: `/transactions/${accountData.account}`,
+    });
     this.$transactionsTable = this.transactionsTable.$el;
 
     setChildren(this.$container, [

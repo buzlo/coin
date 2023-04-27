@@ -68,6 +68,22 @@ router
       transferFunds(transferData, token)
     );
     setChildren($main, detailsPage.$container);
+  })
+  .on('/transactions/:number', async ({ data }) => {
+    const token = getToken();
+    if (!token) router.navigate('/login');
+
+    header.hasNav = true;
+
+    const [details, HistoryPage] = await Promise.all([
+      getDetails(data.number, token),
+      import('./components/History-page').then((module) => module.default),
+    ]);
+
+    const detailsPage = new HistoryPage(details, (transferData) =>
+      transferFunds(transferData, token)
+    );
+    setChildren($main, detailsPage.$container);
   });
 
 router.resolve();

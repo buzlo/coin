@@ -1,0 +1,42 @@
+.subheader {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-row-gap: 30px;
+
+  &__title {
+    margin-bottom: 0;
+  }
+
+  &__go-back-btn {
+    margin-left: auto;
+  }
+
+  &__account-number {
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 40px;
+  }
+
+  &__balance-wrapper {
+    margin-left: auto;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+  }
+
+  &__balance-title {
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  &__balance-value {
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+  }
+}
