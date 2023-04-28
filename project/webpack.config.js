@@ -12,6 +12,7 @@ module.exports = (env) => ({
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Coin',
+      favicon: './src/assets/images/svg/favicon.svg',
     }),
     new MiniCssExtractPlugin({
       filename: 'main.[contenthash].css',
