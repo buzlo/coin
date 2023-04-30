@@ -120,3 +120,14 @@ export async function exchangeCurrency({ from, to, amount }, token) {
   if (parsedRes.error) throw new Error(parsedRes.error);
   return parsedRes.payload;
 }
+
+export async function getBanks(token) {
+  const res = await fetch('http://localhost:3000/banks', {
+    headers: {
+      Authorization: `Basic ${token}`,
+    },
+  });
+  const parsedRes = await res.json();
+  if (parsedRes.error) throw new Error(parsedRes.error);
+  return parsedRes.payload;
+}

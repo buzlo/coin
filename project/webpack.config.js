@@ -118,8 +118,15 @@ module.exports = (env) => ({
       }),
     ],
   },
-  performance: {
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
+  externalsType: 'script',
+  externals: {
+    ymaps3: [
+      'https://api-maps.yandex.ru/3.0/?apikey=e70506a0-5c6f-499f-9fdf-ffc9170481e9&lang=ru-RU',
+      'ymaps3',
+    ],
   },
+  // performance: {
+  //   maxEntrypointSize: 512000,
+  //   maxAssetSize: 512000,
+  // },
 });

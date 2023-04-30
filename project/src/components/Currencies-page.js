@@ -23,10 +23,9 @@ export default class {
     this.exchangeForm = new ExchangeForm(
       'currencies',
       myCurrenciesData,
-      (exchangeData) => {
-        onExchangeSubmit(exchangeData).then((payload) => {
-          this.currencies = payload;
-        });
+      async (exchangeData) => {
+        const payload = await onExchangeSubmit(exchangeData);
+        this.currencies = payload;
       }
     );
 

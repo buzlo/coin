@@ -9,6 +9,7 @@ import {
   getCurrencies,
   createCurrencyFeedSocket,
   exchangeCurrency,
+  getBanks,
 } from './api';
 
 import Header from './components/Header';
@@ -118,6 +119,19 @@ router
         done();
       },
     }
-  );
+  )
+  .on('/banks', async () => {
+    const token = getToken();
+    if (!token) router.navigate('/login');
+
+    header.hasNav = true;
+
+    const [banksData, BanksPage] = await Promise.all([
+      getBanks(token),
+      import('./components/Banks-page').then((module) => module.default),
+    ]);
+    const banksPage = new BanksPage(banksData);
+    setChildren($main, [banksPage.$container]);
+  });
 
 router.resolve();
