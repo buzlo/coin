@@ -14,13 +14,13 @@ export default class {
     this.$recipientsList = el('datalist#recipients-list');
     this.updateRecipientsOptions(this.recipients);
     this.$recipientLabel = el(
-      'label.transfer-form__label.form-label',
+      'label.transfer-form__label.form__label',
       'Номер счёта получателя',
       this.$recipientInput,
       this.$recipientsList
     );
     this.$amountInput = el('input.transfer-form__input.form__input');
-    this.$sumLabel = el(
+    this.$amountLabel = el(
       'label.transfer-form__label.form__label',
       'Сумма перевода',
       this.$amountInput
@@ -52,6 +52,33 @@ export default class {
       errorLabelStyle: {},
     });
 
+    const inputPatternObjs = [
+      {
+        $input: this.$recipientInput,
+        allowedPattern: /\d/,
+      },
+      {
+        $input: this.$amountInput,
+        allowedPattern: /[\d.]/,
+      },
+    ];
+
+    for (const { $input, allowedPattern } of inputPatternObjs) {
+      validation.addField($input, [
+        {
+          rule: 'required',
+          errorMessage: 'Все поля обязательны',
+        },
+      ]);
+      $input.addEventListener('keypress', (event) => {
+        if (!allowedPattern.test(event.key)) {
+          event.preventDefault();
+        }
+
+        this.transferError = false;
+      });
+    }
+
     validation.onSuccess(async (event) => {
       event.preventDefault();
 
@@ -80,44 +107,17 @@ export default class {
             errorMessage = 'Некорректный формат суммы';
             break;
           default:
-            throw error;
+            errorMessage = 'Возникла ошибка. Попробуйте позднее';
         }
         this.$transferErrorMessage.textContent = errorMessage;
         this.transferError = true;
       }
     });
 
-    const inputPatternObjs = [
-      {
-        $input: this.$recipientInput,
-        allowedPattern: /\d/,
-      },
-      {
-        $input: this.$amountInput,
-        allowedPattern: /[\d.]/,
-      },
-    ];
-
-    for (const { $input, allowedPattern } of inputPatternObjs) {
-      validation.addField(this.$amountInput, [
-        {
-          rule: 'required',
-          errorMessage: 'Все поля обязательны',
-        },
-      ]);
-      $input.addEventListener('keypress', (event) => {
-        if (!allowedPattern.test(event.key)) {
-          event.preventDefault();
-        }
-
-        this.transferError = false;
-      });
-    }
-
     setChildren(this.$el, [
       this.$title,
       this.$recipientLabel,
-      this.$sumLabel,
+      this.$amountLabel,
       this.$submitBtn,
     ]);
   }

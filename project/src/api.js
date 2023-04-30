@@ -75,3 +75,48 @@ export async function transferFunds({ from, to, amount }, token) {
   if (parsedRes.error) throw new Error(parsedRes.error);
   return parsedRes.payload;
 }
+
+export async function getCurrencies(token) {
+  const res = await fetch('http://localhost:3000/currencies', {
+    headers: {
+      Authorization: `Basic ${token}`,
+    },
+  });
+  const parsedRes = await res.json();
+  return parsedRes.payload;
+}
+
+export function createCurrencyFeedSocket(object) {
+  object.currencyFeed = [];
+  object.socket = new WebSocket('ws://localhost:3000/currency-feed');
+  object.socket.onmessage = (event) => {
+    const parsedData = JSON.parse(event.data);
+    const currencyFeed = object.currencyFeed.slice();
+    const outdatedEntryIndex = object.currencyFeed.findIndex(
+      (entry) => entry.from === parsedData.from && entry.to === parsedData.to
+    );
+    if (outdatedEntryIndex !== -1) {
+      currencyFeed.splice(outdatedEntryIndex, 1);
+    }
+    currencyFeed.push(parsedData);
+    object.currencyFeed = currencyFeed;
+  };
+}
+
+export async function exchangeCurrency({ from, to, amount }, token) {
+  const res = await fetch('http://localhost:3000/currency-buy', {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from,
+      to,
+      amount,
+    }),
+  });
+  const parsedRes = await res.json();
+  if (parsedRes.error) throw new Error(parsedRes.error);
+  return parsedRes.payload;
+}

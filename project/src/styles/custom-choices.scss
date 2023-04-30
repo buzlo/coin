@@ -4,7 +4,7 @@ $choices-border-radius: 7px;
 $choices-text-color: $gray-2;
 $choices-highlight-color: $primary;
 $choices-highlight-color: rgba(160, 195, 255, 0.1);
-$choices-keyline-color: $primary;
+$choices-keyline-color: $gray-5;
 $choices-bg-color: $white;
 
 @import '~choices.js/src/styles/choices';
@@ -26,7 +26,9 @@ $choices-bg-color: $white;
     padding: 10px 16px;
     font-size: 16px;
 
+    .is-focused &,
     .is-open & {
+      border-color: $primary;
       border-radius: $choices-border-radius;
     }
   }
@@ -41,7 +43,6 @@ $choices-bg-color: $white;
 
     transform: translateY(-50%);
 
-    // fill: $color-primary;
     transition: fill 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
 

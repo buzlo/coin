@@ -1,0 +1,49 @@
+@import 'variables';
+
+.currency-feed {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &__list {
+    overflow-y: scroll;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__item-title {
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  &__item-filler {
+    flex-grow: 1;
+    height: 16px;
+    align-self: center;
+    border-bottom: 1px dashed $black;
+
+    .currency-feed__item_growing & {
+      border-color: $success;
+    }
+
+    .currency-feed__item_deprecating & {
+      border-color: $secondary-4;
+    }
+  }
+
+  &__item-amount {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+  }
+}

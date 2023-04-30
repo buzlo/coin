@@ -1,0 +1,32 @@
+@import 'variables';
+
+.my-currencies {
+  &__item {
+    display: flex;
+    gap: 10px;
+
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+
+  &__item-title {
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  &__item-filler {
+    flex-grow: 1;
+    height: 16px;
+    align-self: center;
+    border-bottom: 1px dashed $black;
+  }
+
+  &__item-amount {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+  }
+}

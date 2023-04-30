@@ -6,6 +6,9 @@ import {
   getToken,
   getDetails,
   transferFunds,
+  getCurrencies,
+  createCurrencyFeedSocket,
+  exchangeCurrency,
 } from './api';
 
 import Header from './components/Header';
@@ -15,6 +18,7 @@ import './styles/styles.scss';
 
 const header = new Header();
 const $main = el('main');
+let socket;
 
 setChildren(document.body, [header.$el, $main]);
 
@@ -84,6 +88,36 @@ router
       transferFunds(transferData, token)
     );
     setChildren($main, detailsPage.$container);
-  });
+  })
+  .on(
+    '/currency',
+    async () => {
+      const token = getToken();
+      if (!token) router.navigate('/login');
+
+      header.hasNav = true;
+
+      const [myCurrenciesData, CurrenciesPage] = await Promise.all([
+        getCurrencies(token),
+        import('./components/Currencies-page').then((module) => module.default),
+      ]);
+
+      const currenciesPage = new CurrenciesPage(
+        myCurrenciesData,
+        (exchangeData) => exchangeCurrency(exchangeData, token)
+      );
+      createCurrencyFeedSocket(currenciesPage);
+      socket = currenciesPage.socket;
+
+      setChildren($main, currenciesPage.$container);
+      currenciesPage.currencies = myCurrenciesData;
+    },
+    {
+      leave(done) {
+        socket.close();
+        done();
+      },
+    }
+  );
 
 router.resolve();

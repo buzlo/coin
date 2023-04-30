@@ -4,7 +4,7 @@ import Chart from 'chart.js/auto';
 
 export default class {
   constructor({ parentCssClass, accountData, monthsQty = 12, href, title }) {
-    this.$el = el(`a.${parentCssClass}__chart.chart`);
+    this.$el = el(`a.${parentCssClass}__chart.chart.card.card_light`);
     if (href) this.$el.setAttribute('href', href);
     this.$title = el('h3.chart__title', title);
     this.$canvas = el('canvas.chart__canvas');

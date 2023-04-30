@@ -3,7 +3,7 @@ import '../styles/details.scss';
 import TransferForm from './Transfer-form';
 import numberFormat from '../helpers/number-format';
 import BalanceChart from './Balance-chart';
-import TransactionsTable from './Transactions';
+import TransactionsTable from './Transactions-table';
 import Subheader from './Subheader';
 
 export default class {
@@ -55,5 +55,9 @@ export default class {
   set balance(value) {
     this._balance = value;
     this.$detailsBalanceValue.textContent = numberFormat(value) + '\u00A0₽';
+  }
+
+  selectHandler(parameter, value) {
+    this[parameter] = value;
   }
 }

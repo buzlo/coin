@@ -8,7 +8,9 @@ export default class {
     this.account = accountData.account;
     this.maxQty = maxQty;
 
-    this.$el = el(`a.${parentCssClass}__transactions.transactions`);
+    this.$el = el(
+      `a.${parentCssClass}__transactions.transactions.card.card_dark`
+    );
     if (href) this.$el.setAttribute('href', href);
 
     this.$table = el('table.transactions__table');
@@ -29,7 +31,7 @@ export default class {
   }
 
   get transactions() {
-    return this._accountData;
+    return this._accountData.transactions;
   }
 
   set transactions(transactionsArr) {
@@ -57,14 +59,5 @@ export default class {
       mount(this.$tbody, $transactionRow);
       this.transactionRows.push($transactionRow);
     }
-  }
-
-  get transactionRows() {
-    return this._transactionRows;
-  }
-
-  set transactionRows(elArray) {
-    this._transactionRows = elArray;
-    setChildren(this.$tbody, elArray);
   }
 }

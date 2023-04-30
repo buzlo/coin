@@ -22,6 +22,7 @@
     border-color: $primary;
 
     &:focus {
+      background-color: $primary;
       border-color: $primary-dark;
     }
 

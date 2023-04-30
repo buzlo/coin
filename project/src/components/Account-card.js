@@ -28,13 +28,12 @@ export default class {
       'Открыть'
     );
 
-    setChildren(
-      this.$card,
+    setChildren(this.$card, [
       this.$account,
       this.$balance,
       $lastTransactionWrapper,
-      this.$detailsBtn
-    );
+      this.$detailsBtn,
+    ]);
   }
 
   update(accountData) {

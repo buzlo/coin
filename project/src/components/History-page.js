@@ -2,7 +2,7 @@ import { el, setChildren } from 'redom';
 import '../styles/history.scss';
 import numberFormat from '../helpers/number-format';
 import BalanceChart from './Balance-chart';
-import TransactionsTable from './Transactions';
+import TransactionsTable from './Transactions-table';
 import TransactionsChart from './Transactions-chart';
 import Subheader from './Subheader';
 

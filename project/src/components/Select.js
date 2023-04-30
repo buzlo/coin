@@ -12,4 +12,12 @@ export default class {
     }
     this.$el.addEventListener('change', (event) => handler(event.target.value));
   }
+
+  get value() {
+    return this.$el.value;
+  }
+
+  set value(value) {
+    this.$el.value = value;
+  }
 }
