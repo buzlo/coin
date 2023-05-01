@@ -125,8 +125,8 @@ module.exports = (env) => ({
       'ymaps3',
     ],
   },
-  // performance: {
-  //   maxEntrypointSize: 512000,
-  //   maxAssetSize: 512000,
-  // },
+  performance: {
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
 });

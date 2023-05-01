@@ -25,17 +25,14 @@ const header = new Header();
 const loadingCard = new LoadingCard();
 const $main = el('main');
 let socket;
-let catchedError = null;
 
 setChildren(document.body, [header.$el, $main]);
 
 router
   .hooks({
     before(done, match) {
-      catchedError = null;
       setChildren($main, [loadingCard.$el]);
-      match.route.handler = handleErrors(match.route.handler, (error) => {
-        catchedError = error;
+      match.route.handler = handleErrors(match.route.handler, () => {
         const errorCard = new ErrorCard(
           'При загрузке произошла ошибка. Попробуйте позднее'
         );

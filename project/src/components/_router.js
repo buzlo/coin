@@ -1,5 +1,5 @@
 import Navigo from 'navigo';
 
-const router = new Navigo('/');
+const router = new Navigo('/', { linksSelector: 'a' });
 
 export default router;

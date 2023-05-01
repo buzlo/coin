@@ -1,3 +1,4 @@
+import router from './_router';
 import { el, setChildren } from 'redom';
 import '../styles/details.scss';
 import TransferForm from './Transfer-form';
@@ -10,13 +11,9 @@ export default class {
   constructor(accountData, onTransferSubmit) {
     this.$container = el('.details.container.main-container');
 
-    this.$subheader = new Subheader(
-      accountData,
-      'Просмотр счёта',
-      'details'
-    ).$el;
+    this.subheader = new Subheader(accountData, 'Просмотр счёта', 'details');
 
-    this.$transferForm = new TransferForm(
+    this.transferForm = new TransferForm(
       'details',
       accountData.account,
       async (transferData) => {
@@ -24,14 +21,14 @@ export default class {
         this.balance = payload.balance;
         this.transactionsTable.transactions = payload.transactions;
       }
-    ).$el;
+    );
 
-    this.$balanceChart = new BalanceChart({
+    this.balanceChart = new BalanceChart({
       parentCssClass: 'details',
       accountData,
       monthsQty: 6,
       href: `/transactions/${accountData.account}`,
-    }).$el;
+    });
 
     this.transactionsTable = new TransactionsTable({
       parentCssClass: 'details',
@@ -39,10 +36,17 @@ export default class {
       href: `/transactions/${accountData.account}`,
     });
 
+    for (const element of [this.balanceChart.$el, this.transactionsTable.$el]) {
+      element.onclick = (event) => {
+        event.preventDefault();
+        router.navigate(element.getAttribute('href'));
+      };
+    }
+
     setChildren(this.$container, [
-      this.$subheader,
-      this.$transferForm,
-      this.$balanceChart,
+      this.subheader.$el,
+      this.transferForm.$el,
+      this.balanceChart.$el,
       this.transactionsTable.$el,
     ]);
   }
