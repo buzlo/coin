@@ -1,0 +1,24 @@
+@import 'variables';
+
+.spinner {
+  width: 64px;        /* the size */
+  padding: 2px;       /* the border thickness */
+  display: inline-block;
+  background: $gray-4; /* the color */
+
+  aspect-ratio: 1;
+  border-radius: 50%;
+  --_m:
+    conic-gradient(#0000,#000),
+    linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  -webkit-mask-composite: source-out;
+          mask-composite: subtract;
+  box-sizing: border-box;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to{transform: rotate(1turn)}
+}

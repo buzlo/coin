@@ -1,0 +1,15 @@
+.loading-card {
+  position: relative;
+  top: 50vh;
+  transform: translateY(-100%);
+
+  margin: auto;
+  width: 326px;
+  padding: 62px 43px;
+
+  text-align: center;
+
+  .spinner {
+    margin-bottom: 43px;
+  }
+}

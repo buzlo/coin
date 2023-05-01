@@ -76,6 +76,12 @@ export default class {
       if (amount < 0) {
         countedData.outboundSum -= amount;
       } else countedData.inboundSum += amount;
+      if (transactions.indexOf(transaction) === 0) {
+        this.monthlyData[consideredMonthIndex].inboundSum =
+          countedData.inboundSum.toFixed(2);
+        this.monthlyData[consideredMonthIndex].outboundSum =
+          countedData.outboundSum.toFixed(2);
+      }
     }
 
     return this.monthlyData.slice(-monthsQty);

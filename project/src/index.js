@@ -2,6 +2,7 @@ import { el, setChildren } from 'redom';
 import router from './components/_router';
 import {
   getAccounts,
+  createAccount,
   fetchToken,
   getToken,
   getDetails,
@@ -12,12 +13,14 @@ import {
   getBanks,
 } from './api';
 
-import Header from './components/Header';
-
 import './styles/normalize.scss';
 import './styles/styles.scss';
 
+import Header from './components/Header';
+import LoadingCard from './components/Loading-card';
+
 const header = new Header();
+const loadingCard = new LoadingCard();
 const $main = el('main');
 let socket;
 
@@ -25,6 +28,10 @@ setChildren(document.body, [header.$el, $main]);
 
 router
   .hooks({
+    before(done) {
+      setChildren($main, loadingCard.$el);
+      done();
+    },
     after(match) {
       header.update(match.url);
     },
@@ -35,8 +42,8 @@ router
     );
   })
   .on('/login', async () => {
-    const $signInForm = (await import('./components/sign-in')).default;
-    setChildren($main, $signInForm(onSubmit));
+    const SignInForm = (await import('./components/Sign-in')).default;
+    setChildren($main, [new SignInForm(onSubmit).$el]);
 
     async function onSubmit(login, password) {
       await fetchToken(login, password);
@@ -49,13 +56,13 @@ router
 
     header.hasNav = true;
 
-    const { createAccount } = await import('./api.js');
-    const AccountsPage = (await import('./components/Accounts-page')).default;
+    const [accounts, AccountsPage] = await Promise.all([
+      getAccounts(token),
+      import('./components/Accounts-page').then((module) => module.default),
+    ]);
     const accountsPage = new AccountsPage(() => createAccount(token));
 
-    setChildren($main, accountsPage.$container);
-
-    const accounts = await getAccounts(token);
+    setChildren($main, [accountsPage.$container]);
     accountsPage.update(accounts);
   })
   .on('/account/:number', async ({ data }) => {
@@ -72,7 +79,7 @@ router
     const detailsPage = new DetailsPage(details, (transferData) =>
       transferFunds(transferData, token)
     );
-    setChildren($main, detailsPage.$container);
+    setChildren($main, [detailsPage.$container]);
   })
   .on('/transactions/:number', async ({ data }) => {
     const token = getToken();
@@ -88,7 +95,7 @@ router
     const detailsPage = new HistoryPage(details, (transferData) =>
       transferFunds(transferData, token)
     );
-    setChildren($main, detailsPage.$container);
+    setChildren($main, [detailsPage.$container]);
   })
   .on(
     '/currency',
@@ -110,7 +117,7 @@ router
       createCurrencyFeedSocket(currenciesPage);
       socket = currenciesPage.socket;
 
-      setChildren($main, currenciesPage.$container);
+      setChildren($main, [currenciesPage.$container]);
       currenciesPage.currencies = myCurrenciesData;
     },
     {

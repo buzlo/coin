@@ -38,13 +38,12 @@ export default class {
       accountData,
       href: `/transactions/${accountData.account}`,
     });
-    this.$transactionsTable = this.transactionsTable.$el;
 
     setChildren(this.$container, [
       this.$subheader,
       this.$transferForm,
       this.$balanceChart,
-      this.$transactionsTable,
+      this.transactionsTable.$el,
     ]);
   }
 

@@ -1,6 +1,7 @@
 @import 'variables';
 
 .transactions {
+  min-width: fit-content;
   border-radius: 56px;
 
   &__caption {

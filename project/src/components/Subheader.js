@@ -9,7 +9,7 @@ export default class {
 
     this.$subheaderAccountNumber = el(
       'p.subheader__account-number',
-      `№ ${accountData.account}`
+      `№\u00A0${accountData.account}`
     );
 
     this.$subheaderBalanceTitle = el('h3.subheader__balance-title', 'Баланс:');

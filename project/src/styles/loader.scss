@@ -1,0 +1,33 @@
+@import 'variables';
+
+.loader {
+  width: 100%;
+  height: 2px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  background-color: $gray-6;
+
+  &::after {
+    content: '';
+    width: 186px;
+    height: 100%;
+    background: radial-gradient(50% 50% at 50% 50%, $gray-4 0%, $gray-6 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    animation: backAndForth 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes backAndForth {
+    0% {
+      left: 0;
+      transform: translateX(-50%);
+    }
+    100% {
+      left: 100%;
+      transform: translateX(-50%);
+    }
+  }
+}

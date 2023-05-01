@@ -1,0 +1,16 @@
+@import 'variables';
+
+.map {
+  background-color: $gray-7;
+  &__marker {
+    width: 24px;
+    height: 24px;
+    background: url('../assets/images/svg/favicon.svg') center / contain no-repeat;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+}
