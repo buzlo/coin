@@ -11,6 +11,7 @@ import {
   createCurrencyFeedSocket,
   exchangeCurrency,
   getBanks,
+  handleErrors,
 } from './api';
 
 import './styles/normalize.scss';
@@ -18,18 +19,28 @@ import './styles/styles.scss';
 
 import Header from './components/Header';
 import LoadingCard from './components/Loading-card';
+import ErrorCard from './components/Error-card';
 
 const header = new Header();
 const loadingCard = new LoadingCard();
 const $main = el('main');
 let socket;
+let catchedError = null;
 
 setChildren(document.body, [header.$el, $main]);
 
 router
   .hooks({
-    before(done) {
-      setChildren($main, loadingCard.$el);
+    before(done, match) {
+      catchedError = null;
+      setChildren($main, [loadingCard.$el]);
+      match.route.handler = handleErrors(match.route.handler, (error) => {
+        catchedError = error;
+        const errorCard = new ErrorCard(
+          'При загрузке произошла ошибка. Попробуйте позднее'
+        );
+        setChildren($main, [errorCard.$el]);
+      });
       done();
     },
     after(match) {
@@ -42,7 +53,7 @@ router
     );
   })
   .on('/login', async () => {
-    const SignInForm = (await import('./components/Sign-in')).default;
+    const SignInForm = (await import('./components/Sign-in-form')).default;
     setChildren($main, [new SignInForm(onSubmit).$el]);
 
     async function onSubmit(login, password) {
@@ -122,7 +133,7 @@ router
     },
     {
       leave(done) {
-        socket.close();
+        if (socket) socket.close();
         done();
       },
     }

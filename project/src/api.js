@@ -131,3 +131,13 @@ export async function getBanks(token) {
   if (parsedRes.error) throw new Error(parsedRes.error);
   return parsedRes.payload;
 }
+
+export function handleErrors(fn, errorHandler) {
+  return async function () {
+    try {
+      return await fn.apply(this, arguments);
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+}
