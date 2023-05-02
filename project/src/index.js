@@ -147,6 +147,9 @@ router
     ]);
     const banksPage = new BanksPage(banksData);
     setChildren($main, [banksPage.$container]);
+  })
+  .notFound(() => {
+    router.navigate('/');
   });
 
 router.resolve();

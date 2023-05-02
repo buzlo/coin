@@ -3,8 +3,10 @@
   "scripts": {
     "lint": "eslint ./",
     "lint:report": "eslint ./",
+    "start": "npm i && concurrently \"cd ../backend && npm start\" \"serve dist/ -l 8080\"",
     "build": "webpack --mode=production --env prod",
-    "dev": "webpack serve --mode=development",
+    "dev": "concurrently \"cd ../backend && npm start\" \"webpack serve --mode=development\"",
+    "e2e": "concurrently \"cd ../backend && npm start\" \"serve dist/ -l 8080\" \"cypress open --e2e --browser chrome\"",
     "test": "jest"
   },
   "devDependencies": {
@@ -14,12 +16,14 @@
     "autoprefixer": "^10.4.14",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
+    "concurrently": "^8.0.1",
     "css-loader": "^6.7.3",
     "cypress": "^12.11.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-formatter-gitlab": "^2.1.0",
+    "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-prettier": "^4.2.1",

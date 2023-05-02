@@ -57,7 +57,8 @@ export default class {
 
   set balance(value) {
     this._balance = value;
-    this.$detailsBalanceValue.textContent = numberFormat(value) + '\u00A0₽';
+    this.subheader.$subheaderBalanceValue.textContent =
+      numberFormat(value) + '\u00A0₽';
   }
 
   selectHandler(parameter, value) {

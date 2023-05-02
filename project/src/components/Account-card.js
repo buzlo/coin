@@ -5,8 +5,8 @@ import getDate from '../helpers/get-date';
 import '../styles/account-card.scss';
 
 export default class {
-  constructor(parentCssClass) {
-    this.$card = el(`.${parentCssClass}__account-card.account-card`);
+  constructor() {
+    this.$card = el('.account-card');
 
     this.$account = el('h2.account-card__number');
     this.$balance = el('p.account-card__balance');

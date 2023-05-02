@@ -95,6 +95,7 @@ export default class {
         this.$amountInput.value = '';
         this.transferSuccess = true;
       } catch (error) {
+        if (error.name !== 'Error') throw error;
         let errorMessage;
         switch (error.message) {
           case 'Invalid account to':

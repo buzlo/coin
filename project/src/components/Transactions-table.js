@@ -35,9 +35,9 @@ export default class {
   }
 
   set transactions(transactionsArr) {
-    this.transactionRows = [];
+    this.$transactionRows = [];
     for (const transaction of transactionsArr.toReversed()) {
-      if (this.transactionRows.length >= this.maxQty) break;
+      if (this.$transactionRows.length >= this.maxQty) break;
 
       const isInbound = transaction.to === this.account;
 
@@ -56,8 +56,8 @@ export default class {
       );
 
       setChildren($transactionRow, [$fromTD, $toTD, $amountTD, $dateTD]);
-      mount(this.$tbody, $transactionRow);
-      this.transactionRows.push($transactionRow);
+      this.$transactionRows.push($transactionRow);
     }
+    setChildren(this.$tbody, this.$transactionRows);
   }
 }
