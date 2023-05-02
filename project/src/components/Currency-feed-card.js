@@ -56,6 +56,7 @@ export default class {
       }
 
       $currencyFeedItems.push($currencyItem);
+      if ($currencyFeedItems.length >= 20) break;
     }
     setChildren(this.$list, $currencyFeedItems);
   }

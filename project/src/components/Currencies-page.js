@@ -18,8 +18,6 @@ export default class {
       myCurrenciesData,
     });
 
-    this.currencyFeedCard = new CurrencyFeedCard('currencies');
-
     this.exchangeForm = new ExchangeForm(
       'currencies',
       myCurrenciesData,
@@ -29,11 +27,17 @@ export default class {
       }
     );
 
+    const $myCurrenciesWrapper = el('.currencies__wrapper', [
+      this.myCurrencies.$el,
+      this.exchangeForm.$el,
+    ]);
+
+    this.currencyFeedCard = new CurrencyFeedCard('currencies');
+
     setChildren(this.$container, [
       $currenciesTitle,
-      this.myCurrencies.$el,
+      $myCurrenciesWrapper,
       this.currencyFeedCard.$el,
-      this.exchangeForm.$el,
     ]);
   }
 
