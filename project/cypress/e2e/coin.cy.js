@@ -2,9 +2,9 @@
 
 describe('Кошелёк Coin', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8800/');
+    cy.visit('http://localhost:8080/');
     cy.get('label').contains('Логин').find('input').type('developer');
-    cy.get('label').contains('Пароль').find('input').type('skillbox');
+    cy.get('label').contains('Пароль').find('input').type('password');
     cy.get('button').contains('Войти').click();
   });
 
@@ -34,13 +34,15 @@ describe('Кошелёк Coin', () => {
           .find('input')
           .type('1000');
 
+        cy.intercept('transfer-funds').as('transferDone');
+
         cy.get('button').contains('Отправить').click();
 
-        cy.get('@balance')
-          .invoke('text')
-          .then((text) => {
-            cy.wrap(extractFloat(text)).should('eq', initBalance - 1000);
+        cy.wait('@transferDone').then(() => {
+          cy.get('@balance').should((element) => {
+            expect(extractFloat(element.text())).to.eq(initBalance - 1000);
           });
+        });
       });
   });
 

@@ -3,10 +3,10 @@
   "scripts": {
     "lint": "eslint ./",
     "lint:report": "eslint ./",
-    "start": "npm i && concurrently \"cd ../backend && npm start\" \"serve dist/ -l 8080\"",
+    "start": "npm i && npm run build && concurrently \"cd ../backend && npm i && npm start\" \"serve dist/ -l 8080\"",
     "build": "webpack --mode=production --env prod",
     "dev": "concurrently \"cd ../backend && npm start\" \"webpack serve --mode=development\"",
-    "e2e": "concurrently \"cd ../backend && npm start\" \"serve dist/ -l 8080\" \"cypress open --e2e --browser chrome\"",
+    "e2e": "npm run build && concurrently \"cd ../backend && npm start\" \"serve dist/ -l 8080\" \"cypress open --e2e --browser chrome\"",
     "test": "jest"
   },
   "devDependencies": {

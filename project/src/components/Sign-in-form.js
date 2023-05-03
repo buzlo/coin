@@ -1,6 +1,6 @@
 import { el, mount, setChildren } from 'redom';
 import JustValidate from 'just-validate';
-import '../styles/sign-in.scss';
+import '../styles/sign-in-form.scss';
 
 export default class {
   constructor(onSubmit) {

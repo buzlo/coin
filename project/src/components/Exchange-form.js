@@ -57,7 +57,7 @@ export default class {
 
     this.$exhangeSuccessMessage = el(
       'p.form__status-label.form__status-label_success',
-      'Перевод осуществлён успешно'
+      'Обмен осуществлён успешно'
     );
 
     this.$exchangeErrorMessage = el(
@@ -103,6 +103,7 @@ export default class {
         this.$amountInput.value = '';
         this.exchangeSuccess = true;
       } catch (error) {
+        if (error.name !== 'Error') throw error;
         let errorMessage;
         switch (error.message) {
           case 'Unknown currency code':

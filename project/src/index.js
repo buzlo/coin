@@ -34,7 +34,7 @@ router
       setChildren($main, [loadingCard.$el]);
       match.route.handler = handleErrors(match.route.handler, () => {
         const errorCard = new ErrorCard(
-          'При загрузке произошла ошибка. Попробуйте позднее'
+          'При загрузке произошла ошибка. Проверьте соединение или повторите позднее'
         );
         setChildren($main, [errorCard.$el]);
       });
